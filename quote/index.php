@@ -169,7 +169,7 @@ function get_data($var) {
 
     <div class="container">
 
-      <form class="form-quote">
+      <form class="form-quote" action="<?php echo basename(__FILE__); ?>" method="post">
         <h2 class="form-quote-heading">Request a quote</h2>
 
         <?php
@@ -193,7 +193,7 @@ function get_data($var) {
           <option>Other</option>
         </select>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Send</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" <?php if (isset($disable) && $disable === true) echo ' disabled="disabled"'; ?> >Send</button>
       </form>
 
     </div> <!-- /container -->
