@@ -41,7 +41,9 @@ body {
   border-top-right-radius: 0;
 }
 .form-quote .bottom {
-  margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+button {
+  margin-top: 10px;
 }
