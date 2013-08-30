@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         header("Location: $thanksPage");
         exit;
       } else {
-        $result = 'Thank you for your request.';
+        $result = 'Thank you for your request, we will contact you with a quote.';
         $disable = true;
       }
     } else {
@@ -178,10 +178,11 @@ function get_data($var) {
         }
         if ($result != NULL) {
           echo '<p>'. $result . "</p>";
+        } else {
+          echo "<p>Please tell us about your project, and we'll get back to you immediately with a quote for a commercial license of FaceTracker.</p>";
         }
         ?>
 
-        <p>Please tell us about your project, and we'll get back to you immediately with a quote for a commercial license of FaceTracker.</p>
         <input name="email" type="email" class="form-control top" placeholder="Email address" autofocus>
         <input name="name" type="text" class="form-control middle" placeholder="Name">
         <textarea name="description" class="form-control middle" rows="6" placeholder="Project description"></textarea>
