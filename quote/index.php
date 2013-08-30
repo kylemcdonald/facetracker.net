@@ -170,6 +170,11 @@ function get_data($var) {
     <div class="container">
 
       <form class="form-quote" action="<?php echo basename(__FILE__); ?>" method="post">
+        
+        <noscript>
+            <p><input type="hidden" name="nojs" id="nojs" /></p>
+        </noscript>
+
         <h2 class="form-quote-heading">Request a quote</h2>
 
         <?php
