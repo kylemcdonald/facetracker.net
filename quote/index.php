@@ -2,8 +2,7 @@
 // OPTIONS - PLEASE CONFIGURE THESE BEFORE USE!
 
 $yourEmail = "info@facetracker.net"; // the email address you wish to receive these mails through
-$yourWebsite = "FaceTracker quote"; // the name of your website
-$thanksPage = ''; // URL to 'thanks for sending mail' page; leave empty to keep message on the same page 
+$yourWebsite = "FaceTracker"; // the name of your website
 $maxPoints = 4; // max points a person can hit before it refuses to submit - recommend 4
 $requiredFields = "name,email,description,category"; // names of the fields you'd like to be required as a minimum, separate each field with a comma
 
@@ -43,22 +42,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
   foreach ($badwords as $word)
     if (
-      strpos(strtolower($_POST['comments']), $word) !== false || 
+      strpos(strtolower($_POST['description']), $word) !== false || 
       strpos(strtolower($_POST['name']), $word) !== false
     )
       $points += 2;
   
-  if (strpos($_POST['comments'], "http://") !== false || strpos($_POST['comments'], "www.") !== false)
+  if (strpos($_POST['description'], "http://") !== false || strpos($_POST['description'], "www.") !== false)
     $points += 2;
   if (isset($_POST['nojs']))
     $points += 1;
-  if (preg_match("/(<.*>)/i", $_POST['comments']))
+  if (preg_match("/(<.*>)/i", $_POST['description']))
     $points += 2;
   if (strlen($_POST['name']) < 3)
     $points += 1;
-  if (strlen($_POST['comments']) < 15 || strlen($_POST['comments'] > 1500))
+  if (strlen($_POST['description']) < 15 || strlen($_POST['description'] > 1500))
     $points += 2;
-  if (preg_match("/[bcdfghjklmnpqrstvwxyz]{7,}/i", $_POST['comments']))
+  if (preg_match("/[bcdfghjklmnpqrstvwxyz]{7,}/i", $_POST['description']))
     $points += 1;
   // end score assignments
 
@@ -77,9 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $error_msg[] = "Invalid website url.\r\n";
   
   if ($error_msg == NULL && $points <= $maxPoints) {
-    $subject = "Automatic Form Email";
+    $subject = "Quote request from ".$_POST['name']." (".$_POST['category'].")";
     
-    $message = "You received this e-mail message through your website: \n\n";
+    $message = "";
     foreach ($_POST as $key => $val) {
       if (is_array($val)) {
         foreach ($val as $subval) {
@@ -103,13 +102,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
     if (mail($yourEmail,$subject,$message,$headers)) {
-      if (!empty($thanksPage)) {
-        header("Location: $thanksPage");
-        exit;
-      } else {
-        $result = 'Thank you for your request, we will contact you with a quote.';
-        $disable = true;
-      }
+      $result = 'Thank you for your request, we will contact you with a quote.';
+      $disable = true;
     } else {
       $error_msg[] = 'Your request could not be made at this time. ['.$points.']';
     }
@@ -169,7 +163,7 @@ function get_data($var) {
 
     <div class="container">
 
-      <form class="form-quote" action="<?php echo basename(__FILE__); ?>" method="post">
+      <form class="form-quote" method="post">
         
         <noscript>
             <p><input type="hidden" name="nojs" id="nojs" /></p>
