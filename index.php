@@ -1,4 +1,6 @@
-<?php include "header.php"; ?>
+<?php
+$page = "main";
+include "header.php"; ?>
       <div class="jumbotron">
         <h1>Fast, accurate, easy face tracking.</h1>
         <p class="lead">FaceTracker is a C++ library for real-time non-rigid face tracking using OpenCV 2, and is free for non-commercial use. For commercial use, please <a href="quote.html">request a quote</a>.</p>
