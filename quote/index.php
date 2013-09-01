@@ -136,32 +136,7 @@ function get_data($var) {
   To read the GNU General Public License, see http://www.gnu.org/licenses/.
 -->
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Request a quote</title>
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-
-    <!-- Custom styles for this template -->
-    <link href="../css/quote.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="../js/html5shiv.js"></script>
-      <script src="../js/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-
-    <div class="container">
+<?php include "../header.php"; ?>
 
       <form class="form-quote" method="post">
         
@@ -196,6 +171,4 @@ function get_data($var) {
         ?>
       </form>
 
-    </div> <!-- /container -->
-  </body>
-</html>
+<?php include "../footer.php"; ?>
