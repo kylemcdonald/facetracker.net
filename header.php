@@ -28,7 +28,7 @@
         <ul class="nav nav-pills pull-right">
           <li class="active"><a href="http://facetracker.net/">Home</a></li>
           <!--<li><a href="http://facetracker.net/gallery/">Gallery</a></li>-->
-          <<li><a href="http://facetracker.net/quote/">Request a Quote</a></li>
+          <li><a href="http://facetracker.net/quote/">Request a Quote</a></li>
         </ul>
         <h3 class="text-muted">FaceTracker</h3>
       </div>
