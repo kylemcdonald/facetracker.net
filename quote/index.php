@@ -178,10 +178,8 @@ function get_data($var) {
         if ($result != NULL) {
           echo '<p>'. $result . "</p>";
         } else {
-          echo "<p>Please tell us about your project, and we'll get back to you immediately with a quote for a commercial license of FaceTracker.</p>";
-        }
         ?>
-
+        <p>Please tell us about your project, and we'll get back to you immediately with a quote for a commercial license of FaceTracker.</p>
         <input name="email" type="email" class="form-control top" placeholder="Email address" autofocus>
         <input name="name" type="text" class="form-control middle" placeholder="Name">
         <textarea name="description" class="form-control middle" rows="6" placeholder="Project description"></textarea>
@@ -192,8 +190,10 @@ function get_data($var) {
           <option>Independent artwork</option>
           <option>Other</option>
         </select>
-
-        <button class="btn btn-lg btn-primary btn-block" type="submit" <?php if (isset($disable) && $disable === true) echo ' disabled="disabled"'; ?> >Send</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Send</button>
+        <?php
+        }
+        ?>
       </form>
 
     </div> <!-- /container -->
