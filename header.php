@@ -26,9 +26,9 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="http://facetracker.net/">Home</a></li>
-          <!--<li><a href="http://facetracker.net/gallery/">Gallery</a></li>-->
-          <li><a href="http://facetracker.net/quote/">Request a Quote</a></li>
+          <li <?php if(strcmp($page, "main")) {echo 'class="active"';}?>><a href="http://facetracker.net/">Home</a></li>
+          <!--<li <?php if(strcmp($page, "gallery")) {echo 'class="active"';}?>><a href="http://facetracker.net/gallery/">Gallery</a></li>-->
+          <li <?php if(strcmp($page, "quote")) {echo 'class="active"';}?>><a href="http://facetracker.net/quote/">Request a Quote</a></li>
         </ul>
         <h3 class="text-muted">FaceTracker</h3>
       </div>

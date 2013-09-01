@@ -136,7 +136,9 @@ function get_data($var) {
   To read the GNU General Public License, see http://www.gnu.org/licenses/.
 -->
 
-<?php include "../header.php"; ?>
+<?php
+$page = "quote";
+include "../header.php"; ?>
 
       <form class="form-quote" method="post">
         
