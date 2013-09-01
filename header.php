@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
-    <link href="http://facetracker.net/css/jumbotron-narrow.css" rel="stylesheet">
+    <link href="http://facetracker.net/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
