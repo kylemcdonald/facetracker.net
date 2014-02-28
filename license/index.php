@@ -2,22 +2,26 @@
 $page = "license";
 include "../header.php"; ?>
 
-<h2>Commercial License</h2>
+<h2>Commercial License (Preview)</h2>
+
+<h3>Summary</h3>
 
 <ul>
   <li>License does not expire.</li>
-  <li>Can be used for distributing unlimited applications</li>
-  <li>Can be distributed in binary or object form only</li>
-  <li>Can modify source-code but cannot distribute modifications (derivative works)</li>
+  <li>Can be distributed in binary or object form only.</li>
+  <li>Can modify source-code but cannot distribute modifications (derivative works).</li>
 </ul>
 
-<p> All users of FaceTracker may submit issues and feature requests on GitHub, which the developers will respond to at their leisure. Any additional support for FaceTracker must be arranged through a separate agreement.</p>
+<h3>Additional terms</h3>
+<ul>
+  <li>License is only offered on a per-product basis. For example, the License may be applied to a single product, application, advertising campaign, or artwork. Future products require a separate license.</li>
+  <li>All users of FaceTracker may submit issues and feature requests on GitHub, which the developers will respond to at their leisure. Any additional support for FaceTracker must be arranged through a separate agreement.</li>
+</ul>
 
-<p>This license is applicable for a single use: a single advertising campaign, application, product, etc. For another use of FaceTracker, a separate license and fee is required.</p>
-
+<h3>Terms and conditions</h3>
 <ol>
 <li>
-  <p><strong>Preamble:</strong> This Agreement, signed on Feb 27, 2014 [hereinafter: Effective Date] governs the relationship between [Licensee], a Business Entity, (hereinafter: Licensee) and FaceTracker, a Partnership under the laws of NY, United States whose principal place of business is 33 Flatbush, 7th Floor, Brooklyn, NY, NY, United States (Hereinafter: Licensor). This Agreement sets the terms, rights, restrictions and obligations on using [FaceTracker] (hereinafter: The Software) created and owned by Licensor, as detailed herein</p>
+  <p><strong>Preamble:</strong> This Agreement, signed on [Date], governs the relationship between [Licensee], a Business Entity, (hereinafter: Licensee) and FaceTracker, a Partnership under the laws of NY, United States whose principal place of business is 33 Flatbush, 7th Floor, Brooklyn, NY, United States (Hereinafter: Licensor). This Agreement sets the terms, rights, restrictions and obligations on using [FaceTracker] (hereinafter: The Software) created and owned by Licensor, as detailed herein</p>
 </li>
 <li>
   <p><strong>License Grant:</strong> Licensor hereby grants Licensee a Sublicensable, Non-assignable & non-transferable, Commercial, Royalty free, Including the rights to create but not distribute derivative works, Non-exclusive license, all with accordance with the terms set forth and other legal restrictions set forth in 3rd party software used while running Software.</p>
@@ -64,7 +68,7 @@ include "../header.php"; ?>
     </li>
   </ol>
 </li>
-<li><strong>Payment:</strong> In consideration of the License granted under clause 2, Licensee shall pay Licensor a fee, via Credit-Card, PayPal or any other mean which Licensor may deem adequate. Failure to perform payment shall construe as material breach of this Agreement. </li>
+<li><strong>Payment:</strong> In consideration of the License granted under clause 2, Licensee shall pay Licensor a fee of [Fee], via Credit-Card, PayPal or any other mean which Licensor may deem adequate. Failure to perform payment shall construe as material breach of this Agreement. </li>
 <li>
   <p><strong>Upgrades, Updates and Fixes:</strong> Licensor may provide Licensee, from time to time, with Upgrades,   Updates or Fixes, as detailed herein and according to his sole   discretion. Licensee hereby warrants to keep The Software up-to-date and   install all relevant updates and fixes, and may, at his sole discretion,   purchase upgrades, according to the rates set by Licensor. Licensor   shall provide any update or Fix free of charge; however, nothing in this   Agreement shall require Licensor to provide Updates or Fixes.</p>
   <ol>
