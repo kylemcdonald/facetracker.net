@@ -15,7 +15,7 @@ include "header.php"; ?>
           <h4><a href="https://github.com/kylemcdonald/ofxFaceTracker">ofxFaceTracker</a></h4>
           <p>An addon for <a href="http://openframeworks.cc">openFrameworks</a> by <a href="http://kylemcdonald.net">Kyle McDonald</a>, including demos of applications such as expression analysis and blink detection.</p>
 
-          <h4><a href="https://github.com/kylemcdonald/ciFaceTracker">ciFaceTracker</a></h4>
+          <h4><a href="https://github.com/Hebali/ciFaceTracker">ciFaceTracker</a></h4>
           <p>A port of ofxFaceTracker for <a href="http://libcinder.org">Cinder</a> by <a href="http://www.patrickhebron.com/">Patrick Hebron</a>.</p>
 
           <h4><a href="https://github.com/kylemcdonald/ofxFaceTracker/downloads">FaceOSC</a></h4>
