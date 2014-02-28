@@ -2,11 +2,11 @@
 $page = "main";
 include "header.php"; ?>
 
-      <a href="https://github.com/kylemcdonald/FaceTracker"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github-camo.global.ssl.fastly.net/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
-
+      <a href="https://github.com/kylemcdonald/FaceTracker"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://github-camo.global.ssl.fastly.net/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+      
       <div class="jumbotron">
         <h1>Fast, accurate, easy face tracking.</h1>
-        <p class="lead">FaceTracker is a C++ library for real-time non-rigid face tracking using OpenCV 2, and is free for non-commercial use. For commercial use, please <a href="quote.html">request a quote</a>.</p>
+        <p class="lead">FaceTracker is a C++ library for real-time non-rigid face tracking using OpenCV 2, and is free for non-commercial use. For commercial use, please <a href="./quote">request a quote</a>.</p>
         <p><a class="btn btn-lg btn-success" href="https://github.com/kylemcdonald/FaceTracker/archive/master.zip">Download</a></p>
       </div>
 
