@@ -39,16 +39,18 @@ if(!empty($_GET['id'])) {
 }
 
 // hash extra arguments and redirect
+$hashed = base64_encode(json_encode($info));
+$baseUrl = strtok($_SERVER["REQUEST_URI"],'?');
 if($redirect) {
-  $hashed = base64_encode(json_encode($info));
-  $url = strtok($_SERVER["REQUEST_URI"],'?');
-  $url = $url . "?id=" . $hashed;
+  $url = $baseUrl . "?id=" . $hashed;
   if(!empty($pass)) {
-    $url = $url . "&" . http_build_query($pass);
+    $url .= "&" . http_build_query($pass);
   }
   header("Location: " . $url);
   exit;
 }
+$doneUrl = "http://facetracker.net";
+$doneUrl .= $baseUrl . "?id=" . $hashed;
 
 // check if the info is complete
 $done = true;
@@ -57,11 +59,30 @@ foreach ($info as $key => $value) {
    $done = false;
  }
 }
-
 // or create is defined
 if(isset($_GET['create'])) {
  $done = false;
 }
+
+// send email
+if($done) {
+  $yourEmail = "info@facetracker.net";
+
+  $subject = "FaceTracker commercial license";
+    
+  $message = "Hello " . $info['licensee'] . ",\n\n" .
+  $message .= "Thank you for purchasing a commercial license for FaceTracker.\n\n";
+  $message .= "Here is a link to your invoice and license for your records:\n\n";
+  $message .= $doneUrl . ".\n\n";
+  $message .= "Thanks,\n";
+  $message .= "FaceTracker Team\n";
+
+  $headers = "From: FaceTracker <" . $yourEmail . ">\n";
+  $headers .= "Reply-To: FaceTracker <" . $yourEmail . ">";
+
+  mail($info['email'], $subject, $message, $headers);
+}
+
 ?>
 
 <?
@@ -115,7 +136,7 @@ h4 {
 
 <h2>Invoice</h2>
 
-<p>This is a request to be paid for the product as described below. Payment may be made via PayPal. A link to this page will be emailed to you for your records.</p>
+<p>This is a request to be paid for the product as described below. Payment may be made via PayPal. A <a href="<?= $doneUrl ?>">link to this page</a> will be emailed to you for your records.</p>
 
 <table class="table">
 <tbody>
@@ -137,6 +158,7 @@ if($pass['sendmail']) {
 <input type="hidden" name="no_note" value="1">
 <input type="hidden" name="currency_code" value="USD">
 <input type="hidden" name="amount" value="<?= number_format($info['fee'], 2) ?>">
+<input type="hidden" name="return" value="<?= $doneUrl ?>">
 <input type="image" src="http://www.paypalobjects.com/en_US/i/btn/btn_paynow_SM.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
 </form>
 
