@@ -65,7 +65,7 @@ if(isset($_GET['create'])) {
 }
 
 // send email
-if($done) {
+if($done && $pass['sendmail']) {
   $yourEmail = "info@facetracker.net";
 
   $subject = "FaceTracker commercial license";
