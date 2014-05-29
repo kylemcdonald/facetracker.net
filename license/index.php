@@ -1,12 +1,22 @@
 <?
 
+// process
+// 4. licensee fills out remaining details
+// 5. remaining info is added to hash and displayed
+
+// 1. make entire page (design invoice)
+// 4. automatically email license after it's filled out
+
+// 3. makes invoice
+// 4. has paypal form
+
 // arguments start empty
 $info = array(
  'date' => '',
  'email' => '',
  'licensee' => '',
  'address' => '',
- 'fee' => '');
+ 'fee' => 0);
 
 // load arguments from url into $info
 foreach ($info as $key => $value) {
@@ -55,53 +65,82 @@ include "../header.php"; ?>
 <?
 
 // create initial license
-if(!$done && count($_GET) > 0) {
+$preview = empty($_GET);
+if(!$preview) {
+  if(!$done) {
 ?>
 
- <form class="form-quote" method="get">
+<form class="form-quote" method="get">
 
- <!-- <h2 class="form-quote-heading">Information</h2> -->
+<p>Please fill out the following fields to complete your FaceTracker commercial license purchase.</p>
+<input name="date" type="hidden" value="<?= date("F j, Y") ?>">
+<input name="email" type="email" class="form-control top" placeholder="Email address" value="<?= $info['email'] ?>">
+<input name="licensee" type="text" class="form-control middle" placeholder="Licensee" value="<?= $info['licensee'] ?>">
+<textarea name="address" class="form-control middle" rows="6" placeholder="Address" value="<?= $info['address'] ?>"></textarea>
+<input name="fee" type="<?= empty($info['fee']) ? "number" : "hidden" ?>" class="form-control middle" placeholder="Fee" value="<?= $info['fee'] ?>">
+<button class="btn btn-lg btn-primary btn-block" type="submit">Complete</button>
+</form>
 
- <p>Please fill out the following fields to complete your FaceTracker commercial license purchase.</p>
- <input name="date" type="hidden" value="<?= "May 29, 2014" ?>">
- <input name="email" type="email" class="form-control top" placeholder="Email address" value="<?= $info['email'] ?>">
- <input name="licensee" type="text" class="form-control middle" placeholder="Licensee" value="<?= $info['licensee'] ?>">
- <textarea name="address" class="form-control middle" rows="6" placeholder="Address" value="<?= $info['address'] ?>"></textarea>
- <input name="fee" type="<?= empty($info['fee']) ? "number" : "hidden" ?>" class="form-control middle" placeholder="Fee" value="<?= $info['fee'] ?>">
- <button class="btn btn-lg btn-primary btn-block" type="submit">Send</button>
- </form>
+<hr/>
 
 <?
 }
-
-// date, licensee, fee, email, address
-// don't want everything to be visible to avoid the feeling that it is hacked together
-// especially the fee should be hidden
-// but we need them to submit address and possibly name & email also
-// so:
-
-// process
-// 1. first page hashes fee
-// 2. you fill out form with email & name
-// 3. creates new hash which is sent to licensee
-// 4. licensee fills out remaining details
-// 5. remaining info is added to hash and displayed
-
-// development
-// 1. make entire page (design invoice)
-// 2. make form fields
-// 3. make hashing work correctly
-// 4. automatically email license after it's filled out
-
-// 0. no arguments yield license preview
-// 1. ?create show form field
-// 2. fill it out, hashes filled out info
-// 3. makes invoice
-// 4. has paypal form
-
 ?>
 
-<h2>Commercial License<?= $done ? "" : " (Preview)" ?></h2>
+<style type="text/css">
+.invoice td:first-child {
+  font-weight: bold;
+  text-align: right;
+}
+.invoice {
+  border: solid 1px LightGray;
+  padding: 0 2em;
+  border-radius: 1em;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+}
+h4 {
+  margin: 0;
+}
+</style>
+
+<div class="invoice">
+
+<h2>Invoice</h2>
+
+<p>This is a request to be paid for the product as described below. Payment may be made via PayPal.</p>
+
+<table class="table">
+<tbody>
+  <tr><td>From</td><td><h4><?= $info['licensee'] ?></h4><p><?= nl2br($info['address']) ?></p></td></tr>
+  <tr><td>To</td><td><h4>FaceTracker</h4><p>33 Flatbush Avenue, 7th Floor<br/>Brooklyn, NY 11217<br/>United States of America</p></td></tr>
+  <tr><td>For</td><td>FaceTracker commercial use license</td></tr>
+  <tr><td>Submitted On</td><td><?= $info['date'] ?></td></tr>
+  <tr><td>Terms</td><td>30 days</td></tr>
+  <tr><td>In the amount of</td><td><p>$<?= number_format($info['fee'], 2) ?> USD</p>
+
+<form name="_xclick" action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="billing@facetracker.net">
+<input type="hidden" name="item_name" value="FaceTracker Commercial License">
+<input type="hidden" name="no_shipping" value="1">
+<input type="hidden" name="no_note" value="1">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="amount" value="<?= number_format($info['fee'], 2) ?>">
+<input type="image" src="http://www.paypalobjects.com/en_US/i/btn/btn_paynow_SM.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+</form>
+
+  </td></tr>
+</tbody>
+</table>
+</div>
+
+<hr/>
+
+<?
+}
+?>
+
+<h2>Commercial License<?= $preview ? " (Preview)" : "" ?></h2>
 
 <h3>Summary</h3>
 
@@ -120,7 +159,7 @@ if(!$done && count($_GET) > 0) {
 <h3>Terms and conditions</h3>
 <ol>
 <li>
- <p><strong>Preamble:</strong> This Agreement, signed on <?= empty($info['date']) ? "[Date]" : $info['date'] ?>, governs the relationship between <?= empty($info['licensee']) ? "[Licensee]" : $info['licensee'] ?>, a Business Entity, (hereinafter: Licensee) and FaceTracker, a Partnership under the laws of NY, United States whose principal place of business is 33 Flatbush, 7th Floor, Brooklyn, NY, United States (Hereinafter: Licensor). This Agreement sets the terms, rights, restrictions and obligations on using FaceTracker (hereinafter: The Software) created and owned by Licensor, as detailed herein</p>
+ <p><strong>Preamble:</strong> This Agreement, signed on <?= empty($info['date']) ? "[Date]" : $info['date'] ?>, governs the relationship between <?= empty($info['licensee']) ? "[Licensee]" : $info['licensee'] ?>, a Business Entity, (hereinafter: Licensee) and FaceTracker, a Partnership under the laws of NY, United States whose principal place of business is 33 Flatbush Avenue, 7th Floor, Brooklyn, NY, 11217, United States of America (Hereinafter: Licensor). This Agreement sets the terms, rights, restrictions and obligations on using FaceTracker (hereinafter: The Software) created and owned by Licensor, as detailed herein</p>
 </li>
 <li>
  <p><strong>License Grant:</strong> Licensor hereby grants Licensee a Sublicensable, Non-assignable & non-transferable, Commercial, Royalty free, Including the rights to create but not distribute derivative works, Non-exclusive license, all with accordance with the terms set forth and other legal restrictions set forth in 3rd party software used while running Software.</p>
