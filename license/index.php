@@ -1,15 +1,5 @@
 <?
 
-// process
-// 4. licensee fills out remaining details
-// 5. remaining info is added to hash and displayed
-
-// 1. make entire page (design invoice)
-// 4. automatically email license after it's filled out
-
-// 3. makes invoice
-// 4. has paypal form
-
 // arguments start empty
 $info = array(
  'date' => '',
@@ -18,36 +8,53 @@ $info = array(
  'address' => '',
  'fee' => 0);
 
+$ignore = array(
+  'sendmail');
+
 // load arguments from url into $info
+$redirect = false;
 foreach ($info as $key => $value) {
  if(!empty($_GET[$key])) {
- $info[$key] = $_GET[$key];
+   $info[$key] = $_GET[$key];
+   $redirect = true;
  }
+}
+
+// load extra arguments into $pass
+$pass = array();
+foreach ($ignore as $item) {
+  if(!empty($_GET[$item])) {
+    $pass[$item] = $_GET[$item];
+  }
 }
 
 // load arguments from hashed data
 if(!empty($_GET['id'])) {
  $cur = json_decode(base64_decode($_GET['id']), true);
  foreach ($info as $key => $value) {
- if(!empty($cur[$key])) {
- $info[$key] = $cur[$key];
- }
+   if(!empty($cur[$key])) {
+     $info[$key] = $cur[$key];
+   }
  }
 }
 
 // hash extra arguments and redirect
-if(count($_GET) > 1) {
- $hashed = base64_encode(json_encode($info));
- $url = strtok($_SERVER["REQUEST_URI"],'?');
- header("Location: " . $url . "?id=" . $hashed);
- exit;
+if($redirect) {
+  $hashed = base64_encode(json_encode($info));
+  $url = strtok($_SERVER["REQUEST_URI"],'?');
+  $url = $url . "?id=" . $hashed;
+  if(!empty($pass)) {
+    $url = $url . "&" . http_build_query($pass);
+  }
+  header("Location: " . $url);
+  exit;
 }
 
 // check if the info is complete
 $done = true;
 foreach ($info as $key => $value) {
  if(empty($value)) {
- $done = false;
+   $done = false;
  }
 }
 
@@ -73,6 +80,7 @@ if(!$preview) {
 <form class="form-quote" method="get">
 
 <p>Please fill out the following fields to complete your FaceTracker commercial license purchase.</p>
+<input name="sendmail" type="hidden" value="true">
 <input name="date" type="hidden" value="<?= date("F j, Y") ?>">
 <input name="email" type="email" class="form-control top" placeholder="Email address" value="<?= $info['email'] ?>">
 <input name="licensee" type="text" class="form-control middle" placeholder="Licensee" value="<?= $info['licensee'] ?>">
@@ -107,27 +115,34 @@ h4 {
 
 <h2>Invoice</h2>
 
-<p>This is a request to be paid for the product as described below. Payment may be made via PayPal.</p>
+<p>This is a request to be paid for the product as described below. Payment may be made via PayPal. A link to this page will be emailed to you for your records.</p>
 
 <table class="table">
 <tbody>
   <tr><td>From</td><td><h4><?= $info['licensee'] ?></h4><p><?= nl2br($info['address']) ?></p></td></tr>
   <tr><td>To</td><td><h4>FaceTracker</h4><p>33 Flatbush Avenue, 7th Floor<br/>Brooklyn, NY 11217<br/>United States of America</p></td></tr>
-  <tr><td>For</td><td>FaceTracker commercial use license</td></tr>
+  <tr><td>For</td><td>FaceTracker commercial license.</td></tr>
   <tr><td>Submitted On</td><td><?= $info['date'] ?></td></tr>
   <tr><td>Terms</td><td>30 days</td></tr>
   <tr><td>In the amount of</td><td><p>$<?= number_format($info['fee'], 2) ?> USD</p>
+<?
+if($pass['sendmail']) {
+?>
 
 <form name="_xclick" action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_xclick">
 <input type="hidden" name="business" value="billing@facetracker.net">
-<input type="hidden" name="item_name" value="FaceTracker Commercial License">
+<input type="hidden" name="item_name" value="FaceTracker commercial license">
 <input type="hidden" name="no_shipping" value="1">
 <input type="hidden" name="no_note" value="1">
 <input type="hidden" name="currency_code" value="USD">
 <input type="hidden" name="amount" value="<?= number_format($info['fee'], 2) ?>">
 <input type="image" src="http://www.paypalobjects.com/en_US/i/btn/btn_paynow_SM.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
 </form>
+
+<?
+}
+?>
 
   </td></tr>
 </tbody>
