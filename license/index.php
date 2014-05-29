@@ -147,7 +147,7 @@ h4 {
   <tr><td>Terms</td><td>30 days</td></tr>
   <tr><td>In the amount of</td><td><p>$<?= number_format($info['fee'], 2) ?> USD</p>
 <?
-if($pass['sendmail']) {
+if($done && $pass['sendmail']) {
 ?>
 
 <form name="_xclick" action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
