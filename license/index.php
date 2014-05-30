@@ -80,7 +80,7 @@ if($done && $pass['sendmail']) {
   $headers = "From: FaceTracker <" . $yourEmail . ">\n";
   $headers .= "Reply-To: FaceTracker <" . $yourEmail . ">";
 
-  mail($info['email'], $subject, $message, $headers);
+  mail($info['email'] . ', ', $yourEmail, $subject, $message, $headers);
 }
 
 ?>
