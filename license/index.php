@@ -70,7 +70,8 @@ if($done && $pass['sendmail']) {
 
   $subject = "FaceTracker commercial license";
     
-  $message = "Hello " . $info['licensee'] . ",\n\n" .
+  $message = "\r\n";
+  $message .= "Hello " . $info['licensee'] . ",\n\n" .
   $message .= "Thank you for purchasing a commercial license for FaceTracker.\n\n";
   $message .= "Here is a link to your invoice and license for your records:\n\n";
   $message .= $doneUrl . "\n\n";
