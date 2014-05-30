@@ -77,8 +77,13 @@ if($done && $pass['sendmail']) {
   $message .= "Thanks,\n";
   $message .= "FaceTracker Team\n";
 
-  $headers = "From: FaceTracker <" . $yourEmail . ">\n";
-  $headers .= "Reply-To: FaceTracker <" . $yourEmail . ">";
+  if (strstr($_SERVER['SERVER_SOFTWARE'], "Win")) {
+    $headers = "From: $yourEmail\n";
+    $headers .= "Reply-To: $yourEmail";
+  } else {
+    $headers = "From: $yourWebsite <$yourEmail>\n";
+    $headers .= "Reply-To: $yourEmail";
+  }
 
   mail($info['email'] . ', ', $yourEmail, $subject, $message, $headers);
 }
