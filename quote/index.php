@@ -187,6 +187,7 @@ include "../header.php"; ?>
         } else {
         ?>
         <p>Please tell us about your project, and we'll get back to you immediately with a quote for a commercial license of FaceTracker.</p>
+        <p>You do not need a license for non-commercial work or for testing, you can <a href="https://github.com/kylemcdonald/FaceTracker/archive/master.zip">download FaceTracker now</a>.</p>
         <input name="email" type="email" class="form-control top" placeholder="Email address" autofocus>
         <input name="name" type="text" class="form-control middle" placeholder="Name">
         <textarea name="description" class="form-control middle" rows="6" placeholder="Project description"></textarea>
