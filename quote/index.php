@@ -10,15 +10,6 @@ $requiredFields = "name,email,description,category"; // names of the fields you'
 function sendQuote($subject, $email, $name, $category) {
   include 'fees.php';
 
-  date_default_timezone_set('America/New_York');
-  $info = array(
-    'email' => $email,
-    'licensee' => $name,
-    'date' => date("F j, Y"),
-    'fee' => $fee);
-  $hash = base64_encode(json_encode($info));
-  $url = 'http://facetracker.net/license/?sendmail=true&id='.$hash;
-
   if(!array_key_exists($category, $formatCategory)) {
     $category = "Other";
   }
@@ -26,6 +17,15 @@ function sendQuote($subject, $email, $name, $category) {
   $message = file_get_contents('email.txt', true);
   $message = str_replace('%category%', $formatCategory[$category], $message);
   $message = str_replace('%fee%', $formatFee[$category], $message);
+
+  date_default_timezone_set('America/New_York');
+  $info = array(
+    'email' => $email,
+    'licensee' => $name,
+    'date' => date("F j, Y"),
+    'fee' => $formatFee[$category]);
+  $hash = base64_encode(json_encode($info));
+  $url = 'http://facetracker.net/license/?sendmail=true&id='.$hash;
   $message = str_replace('%url%', $url, $message);
 
   $headers = "From: \"$fromName\" <$fromEmail>\r\n";
@@ -33,6 +33,13 @@ function sendQuote($subject, $email, $name, $category) {
   $headers.= "X-Mailer: PHP/".phpversion()."\r\n";
   $headers.= "MIME-Version: 1.0" . "\r\n";
   $headers.= "Content-type: text/plain; charset=utf-8\r\n";
+
+  echo "<!--";
+  echo "emailing:";
+  echo $headers;
+  echo $message;
+  echo $url;
+  echo "-->";
 
   return mail($email,$subject,$message,$headers);
 }
