@@ -66,13 +66,14 @@ if(isset($_GET['create'])) {
 
 // send email
 if($done && $pass['sendmail']) {
+  $fromName = "FaceTracker";
   $fromEmail = "info@facetracker.net";
 
   $to = $info['email'];
   $subject = 'FaceTracker commercial license';
-  $headers = "From: $fromEmail\r\n" .
+  $headers = "From: \"$fromName\" <$fromEmail>\r\n" .
+    "Reply-To: \"$fromName\" <$fromEmail>\r\n" .
     "CC: $fromEmail\r\n" .
-    "Reply-To: $fromEmail\r\n" .
     "MIME-Version: 1.0\r\n" .
     "Content-Type: text/html; charset=utf-8\r\n" .
     "X-Mailer: PHP/" . phpversion();

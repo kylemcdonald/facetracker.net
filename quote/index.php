@@ -36,13 +36,6 @@ function sendQuote($subject, $email, $name, $category) {
   $headers.= "MIME-Version: 1.0" . "\r\n";
   $headers.= "Content-type: text/plain; charset=utf-8\r\n";
 
-  echo "<!--";
-  echo "emailing:";
-  echo $headers;
-  echo $message;
-  echo $url;
-  echo "-->";
-
   return mail($email,$subject,$message,$headers);
 }
 
