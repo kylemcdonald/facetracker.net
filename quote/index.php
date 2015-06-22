@@ -9,6 +9,8 @@ $requiredFields = "name,email,description,category"; // names of the fields you'
 // DO NOT EDIT BELOW HERE
 function sendQuote($subject, $email, $name, $category) {
   include 'fees.php';
+  global $fromName;
+  global $fromEmail;
 
   if(!array_key_exists($category, $formatCategory)) {
     $category = "Other";
