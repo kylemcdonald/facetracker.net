@@ -1,13 +1,42 @@
 <?php
 // OPTIONS - PLEASE CONFIGURE THESE BEFORE USE!
 
-$yourEmail = "info@facetracker.net"; // the email address you wish to receive these mails through
-$yourWebsite = "FaceTracker"; // the name of your website
+$fromName = "FaceTracker";
+$fromEmail = "info@facetracker.net"; // the email address you wish to receive these mails through
 $maxPoints = 4; // max points a person can hit before it refuses to submit - recommend 4
 $requiredFields = "name,email,description,category"; // names of the fields you'd like to be required as a minimum, separate each field with a comma
 
-
 // DO NOT EDIT BELOW HERE
+function sendQuote($subject, $email, $name, $category) {
+  include 'fees.php';
+
+  date_default_timezone_set('America/New_York');
+  $info = array(
+    'email' => $email,
+    'licensee' => $name,
+    'date' => date("F j, Y"),
+    'fee' => $fee);
+  $hash = base64_encode(json_encode($info));
+  $url = 'http://facetracker.net/license/?sendmail=true&id='.$hash;
+
+  if(!array_key_exists($category, $formatCategory)) {
+    $category = "Other";
+  }
+
+  $message = file_get_contents('email.txt', true);
+  $message = str_replace('%category%', $formatCategory[$category], $message);
+  $message = str_replace('%fee%', $formatFee[$category], $message);
+  $message = str_replace('%url%', $url, $message);
+
+  $headers = "From: \"$fromName\" <$fromEmail>\r\n";
+  $headers.= "Reply-To: \"$fromName\" <$fromEmail>\r\n";
+  $headers.= "X-Mailer: PHP/".phpversion()."\r\n";
+  $headers.= "MIME-Version: 1.0" . "\r\n";
+  $headers.= "Content-type: text/plain; charset=utf-8\r\n";
+
+  return mail($email,$subject,$message,$headers);
+}
+
 $error_msg = array();
 $result = null;
 
@@ -93,17 +122,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $message .= 'Browser: '.$_SERVER['HTTP_USER_AGENT']."\r\n";
     $message .= 'Points: '.$points;
 
-    if (strstr($_SERVER['SERVER_SOFTWARE'], "Win")) {
-      $headers   = "From: $yourEmail\n";
-      $headers  .= "Reply-To: {$_POST['email']}";
-    } else {
-      $headers   = "From: $yourWebsite <$yourEmail>\n";
-      $headers  .= "Reply-To: {$_POST['email']}";
-    }
+    $headers = "From: \"$fromName\" <$fromEmail>\r\n";
+    $headers.= "Reply-To: \"$fromName\" <$fromEmail>\r\n";
 
-    if (mail($yourEmail,$subject,$message,$headers)) {
+    if (mail($fromEmail,$subject,$message,$headers)) {
       $result = 'Thank you for your request, we will contact you with a quote.';
       $disable = true;
+      $name = $_POST['name'];
+      sendQuote($subject, $email, $name, $category);
     } else {
       $error_msg[] = 'Your request could not be made at this time. ['.$points.']';
     }

@@ -74,7 +74,7 @@ if($done && $pass['sendmail']) {
     "CC: $fromEmail\r\n" .
     "Reply-To: $fromEmail\r\n" .
     "MIME-Version: 1.0\r\n" .
-    "Content-Type: text/html; charset=ISO-8859-1\r\n" .
+    "Content-Type: text/html; charset=utf-8\r\n" .
     "X-Mailer: PHP/" . phpversion();
 
   ob_start();
