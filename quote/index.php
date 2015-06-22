@@ -138,6 +138,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       $result = 'Thank you for your request, we will contact you with a quote.';
       $disable = true;
       $name = $_POST['name'];
+      $email = $_POST['email'];
+      $email = $_POST['category'];
       sendQuote($subject, $email, $name, $category);
     } else {
       $error_msg[] = 'Your request could not be made at this time. ['.$points.']';
