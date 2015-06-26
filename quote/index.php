@@ -32,6 +32,7 @@ function sendQuote($subject, $email, $name, $category) {
 
   $headers = "From: \"$fromName\" <$fromEmail>\r\n";
   $headers.= "Reply-To: \"$fromName\" <$fromEmail>\r\n";
+  $headers.= "Cc: \"$fromName\" <$fromEmail>\r\n";
   $headers.= "X-Mailer: PHP/".phpversion()."\r\n";
   $headers.= "MIME-Version: 1.0" . "\r\n";
   $headers.= "Content-type: text/plain; charset=utf-8\r\n";
