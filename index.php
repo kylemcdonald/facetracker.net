@@ -18,7 +18,7 @@ include "header.php"; ?>
           <h4><a href="https://github.com/Hebali/ciFaceTracker">ciFaceTracker</a></h4>
           <p>A port of ofxFaceTracker for <a href="http://libcinder.org">Cinder</a> by <a href="http://www.patrickhebron.com/">Patrick Hebron</a>.</p>
 
-          <h4><a href="https://github.com/kylemcdonald/ofxFaceTracker/downloads">FaceOSC</a></h4>
+          <h4><a href="https://github.com/kylemcdonald/ofxFaceTracker/releases">FaceOSC</a></h4>
           <p>An application by <a href="http://kylemcdonald.net">Kyle McDonald</a> that connects to an available webcam, tracks a face, and streams tracking information in realtime over OSC for quickly prototyping in various environments or controlling OSC-enabled applications.</p>
 
           <h4><a href="https://github.com/CreativeInquiry/FaceOSC-Templates">FaceOSC-templates</a></h4>
